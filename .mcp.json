@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "/opt/homebrew/bin/playwright-mcp"
+    }
+  }
+}

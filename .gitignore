@@ -1,0 +1,28 @@
+# --- Android / Gradle 빌드 산출물 (소스에서 재생성됨) ---
+.gradle/
+build/
+**/build/
+*.apk
+*.aab
+local.properties
+captures/
+.cxx/
+
+# --- IDE ---
+.idea/
+*.iml
+.vscode/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Node (웹 프로젝트용) ---
+node_modules/
+dist/
+.next/
+*.log
+
+# --- 기타 ---
+.env
+.env.local

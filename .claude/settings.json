@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)"
+    ],
+    "ask": [
+      "Bash(gh repo create:*)"
+    ],
+    "allow": [
+      "mcp__playwright__*",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue close:*)",
+      "Bash(gh issue reopen:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git init:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git remote:*)",
+      "Bash(git branch:*)",
+      "Bash(gh issue comment:*)",
+      "Bash(gh api user:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(cp -R projects/_template:*)"
+    ]
+  }
+}

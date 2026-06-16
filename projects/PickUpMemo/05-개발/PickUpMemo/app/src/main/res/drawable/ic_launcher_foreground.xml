@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 단순 플레이스홀더 런처 아이콘 전경 (검증 도구용). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,40h40a4,4 0,0 1,4 4v20a4,4 0,0 1,-4 4h-28l-12,12v-12a4,4 0,0 1,0 -8z" />
+</vector>

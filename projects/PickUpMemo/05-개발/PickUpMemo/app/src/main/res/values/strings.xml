@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  모든 한글 사용자 표시 문자열을 한 곳에 모은다.
+  H-1(#15)에서 정리 완료: 미사용/중복 문자열 제거, 하드코딩 문자열 잔여 없음 확인.
+  코드(.kt)·레이아웃(.xml)의 모든 사용자 표시 문구는 이 파일의 리소스를 참조한다.
+  ※ 로그 파일 포맷의 영문 라벨(Package/Type/Text/Title/Body 등)은 설계서 5-2의
+    "사람이 읽기 쉬운 고정 형식"으로 의도된 것이라 문자열 리소스화 대상이 아니다.
+-->
+<resources>
+    <string name="app_name">PickUpMemo</string>
+    <!-- A-2(#2): 시스템 접근성 설정 화면에 표시될 서비스 설명 문구 (설계서 6-3) -->
+    <string name="accessibility_service_desc">PickUpMemo가 화면 텍스트(업체 상호 등)를 수집해 로그로 남기는지 검증합니다.</string>
+
+    <!-- D-1(#9): 메인 화면 (설계서 4-1 ①) -->
+    <string name="main_title">PickUpMemo (검증 도구)</string>
+    <!-- 상태 표시 라벨/값 (onResume 갱신) -->
+    <string name="status_accessibility_service">접근성 서비스</string>
+    <string name="status_accessibility_permission">접근성 권한</string>
+    <string name="status_notification_access">알림 접근 권한</string>
+    <string name="status_running">실행 중</string>
+    <string name="status_stopped">중지</string>
+    <string name="status_granted">허가</string>
+    <string name="status_denied">미허가</string>
+    <!-- 버튼 -->
+    <string name="btn_open_accessibility_settings">접근성 설정 열기</string>
+    <string name="btn_open_notification_settings">알림 접근 설정 열기</string>
+    <string name="btn_test_notification">테스트 알림 생성</string>
+    <string name="btn_accessibility_test">접근성 테스트 화면</string>
+    <string name="btn_log_view">로그 보기</string>
+    <string name="btn_log_export">로그 내보내기</string>
+    <!-- 기기에 설정 액션이 없을 때 등 안내 (startSettings 폴백) -->
+    <string name="toast_not_implemented">이 기기에서 해당 설정을 열 수 없습니다</string>
+
+    <!-- G-1(#13): 테스트 알림 (설계서 9장 G-1) -->
+    <string name="notif_channel_name">테스트 배달 알림</string>
+    <string name="notif_channel_desc">PickUpMemo 데모용 테스트 알림입니다. 알림 리스너 수집 검증에 사용됩니다.</string>
+    <string name="notif_test_title">신규 배달 요청</string>
+    <string name="notif_test_body">교촌치킨 죽전점 / 배달료 3,900원</string>
+    <string name="toast_test_notification_posted">테스트 알림을 생성했습니다</string>
+    <string name="toast_notification_permission_denied">알림 권한이 없어 테스트 알림을 표시할 수 없습니다</string>
+
+    <!-- E-1(#10): 로그 내보내기 (설계서 4-4 시나리오 C) -->
+    <string name="export_chooser_title">로그 파일 공유</string>
+    <string name="toast_export_failed">내보내기에 실패했습니다</string>
+    <string name="toast_export_no_app">공유할 수 있는 앱이 없습니다</string>
+
+    <!-- F-1(#11): 로그 조회 화면 (설계서 4-1 ②) -->
+    <string name="log_view_title">로그 보기</string>
+    <string name="log_view_empty">수집된 로그가 없습니다.\n접근성/알림 권한을 켜고 외부 앱 화면이나 알림이 발생하면 여기에 최신순으로 표시됩니다.</string>
+
+    <!-- F-2(#12): 패키지명 필터 + 전체 삭제 (설계서 4-1 ②) -->
+    <string name="log_filter_hint">패키지명 필터 (예: com.sample.app)</string>
+    <string name="btn_filter_apply">적용</string>
+    <string name="btn_clear_all">전체 삭제</string>
+    <string name="log_view_empty_filtered">필터(\'%1$s\')에 해당하는 로그가 없습니다.</string>
+    <string name="dialog_clear_title">전체 삭제</string>
+    <string name="dialog_clear_message">수집된 로그를 모두 삭제합니다. 되돌릴 수 없습니다. 진행할까요?</string>
+    <string name="dialog_clear_confirm">삭제</string>
+    <string name="dialog_clear_cancel">취소</string>
+    <string name="toast_cleared">로그를 모두 삭제했습니다</string>
+
+    <!-- G-2(#14): 접근성 테스트 화면 (데모 - 모의 배차 화면, 설계서 4-1 ③) -->
+    <string name="accessibility_test_title">접근성 테스트 화면</string>
+    <string name="acc_test_store_label">업체 상호</string>
+    <string name="acc_test_store_name">교촌치킨 죽전점</string>
+    <string name="acc_test_store_desc">업체상호</string>
+    <string name="acc_test_address">전달지 주소: 경기 용인시 수지구 죽전로 152</string>
+    <string name="acc_test_btn_accept">배차 수락</string>
+    <string name="acc_test_btn_reject">거절</string>
+    <string name="acc_test_hint">이 화면의 텍스트(업체 상호·상호명·주소·버튼)가 접근성 서비스 로그에 수집되는지 확인하기 위한 데모 화면입니다. 버튼은 실제 동작하지 않습니다.</string>
+    <string name="toast_acc_test_accept">[데모] 배차를 수락했습니다</string>
+    <string name="toast_acc_test_reject">[데모] 배차를 거절했습니다</string>
+</resources>

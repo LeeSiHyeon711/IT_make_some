@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  D-1(#9) 메인/허브 화면 (설계서 4-1 ①).
+  상단: 권한/서비스 상태 3종(onResume 갱신) → 설정 이동 버튼 2종 →
+  데모(테스트 알림/접근성 테스트) → 조회/내보내기 버튼.
+  디자인은 최하위 우선순위 — 표준 위젯의 단순 세로 배치.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_title"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:paddingBottom="16dp" />
+
+        <!-- 상태 3종 (코드에서 "라벨 : 값" 형태로 갱신) -->
+        <TextView
+            android:id="@+id/tvAccessibilityServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/tvAccessibilityPermissionStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/tvNotificationAccessStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:paddingVertical="4dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="16dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- 설정 화면 이동 (설계서 4-3 시나리오 A) -->
+        <Button
+            android:id="@+id/btnAccessibilitySettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_open_accessibility_settings" />
+
+        <Button
+            android:id="@+id/btnNotificationSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_open_notification_settings" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="16dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- 데모: 테스트 알림(#13) / 접근성 테스트 화면(#14) -->
+        <Button
+            android:id="@+id/btnTestNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_test_notification" />
+
+        <Button
+            android:id="@+id/btnAccessibilityTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_accessibility_test" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="16dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- 조회(#11/#12) / 내보내기(#10) -->
+        <Button
+            android:id="@+id/btnLogView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_log_view" />
+
+        <Button
+            android:id="@+id/btnLogExport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_log_export" />
+
+    </LinearLayout>
+
+</ScrollView>

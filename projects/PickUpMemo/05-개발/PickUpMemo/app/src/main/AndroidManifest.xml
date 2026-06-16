@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A-2(#2) 매니페스트: 권한 + FileProvider + 3개 Activity + 2개 시스템 바인드 서비스 등록.
+  설계서 6장 준수:
+   - INTERNET / FOREGROUND_SERVICE 권한은 선언하지 않는다(외부통신 없음 / 시스템 바인드 서비스라 불필요).
+   - BIND_ACCESSIBILITY_SERVICE / BIND_NOTIFICATION_LISTENER_SERVICE 는 uses-permission이 아니라
+     각 서비스 선언의 android:permission 속성으로 등록한다.
+   - POST_NOTIFICATIONS 는 런타임 권한(API 33+). 선언만 여기서 하고 런타임 요청은 G-1(#13)에서 처리.
+  서비스/추가 Activity의 본문 구현은 후속 이슈(C-1 #6, C-2 #7, F-1 #11, G-2 #14)에서 채운다.
+  본 이슈는 매니페스트 등록 + 빌드 통과용 placeholder 수준까지만이다.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 설계서 6-1: 테스트 알림 발생용 (API 33+ 런타임 요청). INTERNET/FOREGROUND_SERVICE 미선언. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PickUpMemo">
+
+        <!-- 설계서 6-5: 메인/허브 (LAUNCHER) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 설계서 6-5: 로그 조회 -->
+        <activity
+            android:name=".ui.LogViewActivity"
+            android:exported="false" />
+
+        <!-- 설계서 6-5: 데모 모의 배차 화면 -->
+        <activity
+            android:name=".ui.AccessibilityTestActivity"
+            android:exported="false" />
+
+        <!-- 설계서 6-2: 접근성 서비스 (시스템이 BIND_ACCESSIBILITY_SERVICE로 바인드) -->
+        <service
+            android:name=".service.ScreenAccessibilityService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- 설계서 6-2: 알림 수신기 서비스 (시스템이 BIND_NOTIFICATION_LISTENER_SERVICE로 바인드) -->
+        <service
+            android:name=".service.LogNotificationListenerService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- 설계서 6-4: 로그 내보내기 파일 공유용 FileProvider -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

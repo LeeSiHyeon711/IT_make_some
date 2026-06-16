@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  로그 조회 화면 (설계서 4-1 ②).
+  - F-1(#11): RecyclerView로 LogRepository의 로그를 최신순 표시.
+  - F-2(#12): 상단에 패키지명 필터 입력행(EditText + [적용])과 [전체 삭제] 버튼 추가.
+  디자인은 최하위 우선순위 — 표준 위젯의 단순 세로 배치.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- F-2: 패키지명 필터 입력 + 적용 버튼 (한 줄). 비우고 적용하면 전체 표시. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="8dp">
+
+        <EditText
+            android:id="@+id/etFilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/log_filter_hint"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:imeOptions="actionSearch"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btnApplyFilter"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_filter_apply" />
+    </LinearLayout>
+
+    <!-- F-2: 전체 삭제 버튼 -->
+    <Button
+        android:id="@+id/btnClearAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/btn_clear_all" />
+
+    <!-- F-1: 로그 목록 + 0건 안내 (FrameLayout로 겹쳐 토글). -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLogs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingVertical="8dp" />
+
+        <!-- 로그 0건/필터 무결과일 때 안내. 코드에서 표시/숨김 토글. -->
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/log_view_empty"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>

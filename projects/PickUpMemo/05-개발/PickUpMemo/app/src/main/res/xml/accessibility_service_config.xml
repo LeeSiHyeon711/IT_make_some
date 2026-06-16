@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  접근성 서비스 수집 범위 (설계서 6-3, 이슈 C-1 #6).
+
+  - accessibilityEventTypes: 화면 텍스트 변화를 포착하는 3종
+      typeWindowStateChanged   : 창/Activity 전환
+      typeWindowContentChanged : 화면 내용 변경
+      typeViewTextChanged      : 개별 뷰 텍스트 변경
+  - accessibilityFlags:
+      flagReportViewIds            : viewIdResourceName 수집 가능
+      flagIncludeNotImportantViews : 중요도 낮은 뷰까지 순회(업체 상호 등 누락 방지)
+      flagRetrieveInteractiveWindows : 상호작용 가능한 창 정보 확보
+  - canRetrieveWindowContent="true" : 노드 트리(화면 내용) 조회 허용
+  - packageNames 미지정 : 모든 앱 대상(배민커넥트 포함 전체 수집, 검증 단계)
+  - notificationTimeout="100" : 이벤트 콜백 throttle(ms)
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeViewTextChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagReportViewIds|flagIncludeNotImportantViews|flagRetrieveInteractiveWindows"
+    android:canRetrieveWindowContent="true"
+    android:notificationTimeout="100"
+    android:description="@string/accessibility_service_desc" />

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  F-1(#11) 로그 목록 1행 (설계서 4-1 ② / 5-2 고정 형식).
+  LogEntry.toLogBlock()이 생성하는 사람이 읽기 쉬운 블록(시각/Package/Type/Text 또는 Title·Body)을
+  그대로 한 TextView에 표시한다. 디자인 최하위 우선순위 — 모노스페이스 + 행 구분선.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
+
+    <TextView
+        android:id="@+id/tvLogBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textIsSelectable="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+
+</LinearLayout>

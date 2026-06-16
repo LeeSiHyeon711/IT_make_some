@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  G-2(#14): 데모 - 모의 배차 화면 (설계서 4-1 ③).
+  평범한 TextView/Button만 사용해 접근성 트리(text/contentDescription)에
+  그대로 노출되도록 한다. 디자인은 최하위(검증용).
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- 업체 상호 라벨 -->
+        <TextView
+            android:id="@+id/tv_store_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/acc_test_store_label"
+            android:textSize="14sp" />
+
+        <!-- 상호명 (설계서 5-2 예시: Text: 교촌치킨 죽전점 | desc=업체상호 | id=tv_store_name) -->
+        <TextView
+            android:id="@+id/tv_store_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/acc_test_store_desc"
+            android:text="@string/acc_test_store_name"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- 전달지 주소 -->
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/acc_test_address"
+            android:textSize="16sp" />
+
+        <!-- 배차 수락 / 거절 버튼 행 (실제 동작 아님 - 클릭 시 토스트) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_accept"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/acc_test_btn_accept" />
+
+            <Button
+                android:id="@+id/btn_reject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="@string/acc_test_btn_reject" />
+        </LinearLayout>
+
+        <!-- 화면 목적 안내 -->
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/acc_test_hint"
+            android:textSize="13sp" />
+    </LinearLayout>
+</ScrollView>

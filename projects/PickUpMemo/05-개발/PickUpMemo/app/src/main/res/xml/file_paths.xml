@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  설계서 6-4 / 5-4: 내보내기 임시 파일(filesDir/exports/)만 FileProvider로 노출한다.
+  내부 로그 본 파일(filesDir/pickupmemo_log.txt)은 노출하지 않는다.
+-->
+<paths>
+    <files-path
+        name="exports"
+        path="exports/" />
+</paths>
