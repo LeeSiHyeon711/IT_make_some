@@ -35,7 +35,7 @@
     <string name="notif_channel_name">테스트 배달 알림</string>
     <string name="notif_channel_desc">PickUpMemo 데모용 테스트 알림입니다. 알림 리스너 수집 검증에 사용됩니다.</string>
     <string name="notif_test_title">신규 배달 요청</string>
-    <string name="notif_test_body">교촌치킨 죽전점 / 배달료 3,900원</string>
+    <string name="notif_test_body">픽업지 / 푸라닭 신림점 / 전달지 / 배달료 3,900원</string>
     <string name="toast_test_notification_posted">테스트 알림을 생성했습니다</string>
     <string name="toast_notification_permission_denied">알림 권한이 없어 테스트 알림을 표시할 수 없습니다</string>
 

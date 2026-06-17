@@ -26,3 +26,7 @@ dist/
 # --- 기타 ---
 .env
 .env.local
+
+# --- 고객별 개발 코드 (자체 repo로 분리 — 공방 repo는 공정 산출물만 추적) ---
+# PickUpMemo_v2 개발 코드는 github.com/LeeSiHyeon711/PickUpMemo_v2 에 별도 보관
+projects/PickUpMemo_v2/05-개발/PickUpMemo_v2/
