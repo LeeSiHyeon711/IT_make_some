@@ -103,7 +103,8 @@ def call_anthropic(prompt: str, *, max_tokens: int = 800, prefill: str | None = 
     if prefill:
         messages.append({"role": "assistant", "content": prefill})
 
-    client = anthropic.Anthropic(timeout=_timeout_seconds())  # api_key는 env에서 자동
+    # max_retries=0: 재시도로 타임아웃이 누적(5s×3≈15s)되는 것을 막아 지연 상한을 timeout으로 고정
+    client = anthropic.Anthropic(timeout=_timeout_seconds(), max_retries=0)  # api_key는 env에서 자동
     try:
         msg = client.messages.create(
             model=_model_name(),
@@ -265,21 +266,21 @@ def diagnose_idea_llm(intake: IntakeData) -> Diagnosis:
 
 def design_first_experiment_llm(intake: IntakeData, diagnosis: Diagnosis) -> FirstExperiment:
     prompt = (
-        "균열점과 시간 예산으로 '첫 검증 미션'을 설계해 JSON만 반환해. 개발 말고 수동/노코드/질문 우선. JSON만.\n"
-        "필드: mission_title(str), mission_steps(최대3 str배열), why_this_experiment(str), "
-        "success_criteria(1~2 str배열), do_not_build_yet(최대3 str배열), next_step_if_passed(str).\n"
+        "균열점과 시간 예산으로 '첫 검증 미션'을 설계해 JSON만 반환해. 개발 말고 수동/노코드/질문 우선. 짧게. JSON만.\n"
+        "필드: mission_title(str), mission_steps(최대3 str배열), why_this_experiment(1~2문장 str), "
+        "success_criteria(1개 str배열), do_not_build_yet(최대2 str배열), next_step_if_passed(str).\n"
         f"시간예산: {intake.validation_time_budget} / 균열점: {diagnosis.crack_point}"
     )
-    data = _parse_json(call_anthropic(prompt, max_tokens=900, prefill="{"))  # 출력이 커 잘림 방지
+    data = _parse_json(call_anthropic(prompt, max_tokens=500, prefill="{"))  # 출력 축소로 지연↓
     label = _BUDGET_LABEL.get(intake.validation_time_budget, "미정")
     return FirstExperiment(
         time_budget=label,
         mission_title=str(data.get("mission_title") or ""),
         mission_steps=[str(x) for x in (data.get("mission_steps") or [])][:3],
         why_this_experiment=str(data.get("why_this_experiment") or ""),
-        success_criteria=[str(x) for x in (data.get("success_criteria") or [])][:2],
+        success_criteria=[str(x) for x in (data.get("success_criteria") or [])][:1],
         failure_signals=[str(x) for x in (data.get("failure_signals") or [])][:2] or ["반응 없음"],
-        do_not_build_yet=[str(x) for x in (data.get("do_not_build_yet") or [])][:3],
+        do_not_build_yet=[str(x) for x in (data.get("do_not_build_yet") or [])][:2],
         next_step_if_passed=str(data.get("next_step_if_passed") or ""),
     )
 
