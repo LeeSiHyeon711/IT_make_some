@@ -241,8 +241,12 @@ IT_make_some/
     ├── _template/      # 신규 프로젝트 골격 (7단계 폴더 + features/ + progress.md)
     ├── PickUpMemo/     # 사례 v1: 기술검증용 Log Collector (접근성 로그 가설 검증)
     ├── PickUpMemo_v2/  # 사례 v2: 실사용 MVP (메모 매칭·오버레이 팝업, 실기기·사용자 전달)
-    └── dday-test/      # 사례: 웹
+    ├── dday-test/      # 사례: 웹
+    └── sangsang-lite/  # 실험 프로젝트: 상상공방 Lite (아이디어 → 검증할 것으로 변환)
 ```
+
+> **실험 프로젝트 — 상상공방 Lite**: 아이디어를 "만들 것"이 아니라 "먼저 확인할 것"으로 바꾸는 경량 검증 공방.
+> 기획 문서는 [`projects/sangsang-lite/`](projects/sangsang-lite/README.md) 참조. (본 공방과 목적이 다른 별도 실험)
 
 ---
 

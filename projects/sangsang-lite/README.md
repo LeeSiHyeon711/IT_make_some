@@ -23,19 +23,36 @@
 
 ---
 
-## 문서 구성
+## 프로젝트 구조
+
+```
+projects/sangsang-lite/
+├─ README.md          # 이 문서 (인덱스)
+├─ docs/              # 기획 문서 (01~09)
+├─ prompts/           # (예정) 에이전트 프롬프트 보관
+└─ prototype/         # (예정) PlayMCP/MCP 프로토타입·데모 구현
+```
+
+## 기획 문서 (docs/)
 
 | 문서 | 내용 |
 |------|------|
-| [`01-overview.md`](01-overview.md) | 핵심 정의 · 서비스 철학 · 존재 이유 |
-| [`02-workflow.md`](02-workflow.md) | 전체 워크플로 (MVP=순차 실행) |
-| [`03-communication-agent.md`](03-communication-agent.md) | 소통 에이전트 (자유 서술 → 구조화) |
-| [`04-intake-confirmation.md`](04-intake-confirmation.md) | 공방 접수 확인 (승인 게이트) |
-| [`05-idea-diagnosis-agent.md`](05-idea-diagnosis-agent.md) | 아이디어 진단 에이전트 (균열점 진단) |
-| [`06-first-experiment-agent.md`](06-first-experiment-agent.md) | 첫 실험 설계 에이전트 (첫 검증 미션) |
-| [`07-output-agent.md`](07-output-agent.md) | 출력 에이전트 (결과카드 편집) |
-| [`08-result-card-format.md`](08-result-card-format.md) | 공방 결과카드 기본 양식 |
-| [`09-demo-scenarios.md`](09-demo-scenarios.md) | 데모 시나리오 (엔드투엔드 예시) |
+| [`docs/01-overview.md`](docs/01-overview.md) | 핵심 정의 · 서비스 철학 · 존재 이유 |
+| [`docs/02-workflow.md`](docs/02-workflow.md) | 전체 워크플로 (MVP=순차 실행) |
+| [`docs/03-communication-agent.md`](docs/03-communication-agent.md) | 소통 에이전트 (자유 서술 → 구조화) |
+| [`docs/04-intake-confirmation.md`](docs/04-intake-confirmation.md) | 공방 접수 확인 (승인 게이트) |
+| [`docs/05-idea-diagnosis-agent.md`](docs/05-idea-diagnosis-agent.md) | 아이디어 진단 에이전트 (균열점 진단) |
+| [`docs/06-first-experiment-agent.md`](docs/06-first-experiment-agent.md) | 첫 실험 설계 에이전트 (첫 검증 미션) |
+| [`docs/07-output-agent.md`](docs/07-output-agent.md) | 출력 에이전트 (결과카드 편집) |
+| [`docs/08-result-card-format.md`](docs/08-result-card-format.md) | 공방 결과카드 기본 양식 |
+| [`docs/09-demo-scenarios.md`](docs/09-demo-scenarios.md) | 데모 시나리오 (엔드투엔드 예시) |
+
+## 작업 공간 (예정)
+
+| 폴더 | 용도 |
+|------|------|
+| [`prompts/`](prompts/README.md) | 각 에이전트(소통·진단·첫실험·출력)의 실제 프롬프트 보관 (구현 단계) |
+| [`prototype/`](prototype/README.md) | PlayMCP/MCP 프로토타입 또는 데모 구현 보관 (구현 단계) |
 
 ---
 
