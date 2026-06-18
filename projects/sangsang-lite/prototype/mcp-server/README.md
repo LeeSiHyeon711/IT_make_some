@@ -98,6 +98,45 @@ python scripts/verify_mcp.py http://127.0.0.1:8000/mcp
 
 ---
 
+## LLM 사용 (선택 — 없으면 stub fallback)
+
+도구 3개는 기본적으로 **결정적 stub**으로 동작한다. 아래 환경변수를 모두 갖추면 Anthropic 호출로 전환되고,
+**키가 없거나 비활성/오류/타임아웃이면 자동으로 stub으로 fallback**한다(도구 호출은 항상 성공).
+
+| 환경변수 | 기본값 | 동작 |
+|----------|--------|------|
+| `ANTHROPIC_API_KEY` | (없음) | 없으면 stub fallback (`missing_api_key`) |
+| `LLM_ENABLED` | `false` | `true`/`1`/`yes`만 LLM 사용. 그 외 stub (`disabled`) |
+| `MODEL_NAME` | `claude-3-5-haiku-latest` | 가벼운 Claude 기본값. 필요 시 override |
+| `LLM_TIMEOUT_SECONDS` | `2.5` | 호출 타임아웃(초). 초과 시 stub (`timeout`) |
+
+- 결과에는 optional `meta`가 붙는다: `{"source": "llm"|"stub", "fallback_reason": null|"missing_api_key"|"disabled"|"timeout"|"api_error"}`.
+- LLM 응답은 JSON으로 받아 **기존 pydantic schema에 맞춰 정제**해 반환한다(원문 그대로 반환하지 않음). 파싱 실패 시 stub fallback.
+
+### 로컬 (LLM on)
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+export LLM_ENABLED=true
+export MODEL_NAME=claude-3-5-haiku-latest    # 생략 가능(기본값)
+PYTHONPATH=src PORT=8000 python -m sangsang_lite_mcp.server
+```
+
+### Docker (LLM on)
+
+```bash
+docker run -d -p 8080:8000 \
+  -e PORT=8000 \
+  -e LLM_ENABLED=true \
+  -e ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
+  -e MODEL_NAME=$MODEL_NAME \
+  sangsang-lite-mcp:latest
+```
+
+> 키를 안 주거나 `LLM_ENABLED`를 빼면 동일 이미지가 **stub fallback**으로 동작한다(검증·Inspector는 키 없이도 통과).
+
+---
+
 ## 구조
 
 ```
