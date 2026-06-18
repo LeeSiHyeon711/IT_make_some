@@ -48,6 +48,7 @@ projects/sangsang-lite/
 | [`docs/09-demo-scenarios.md`](docs/09-demo-scenarios.md) | 데모 시나리오 (엔드투엔드 예시) |
 | [`docs/13-streamable-http-examples-research.md`](docs/13-streamable-http-examples-research.md) | PlayMCP 제출용 Streamable HTTP MCP 서버 예제 조사 + 구현 구조 결정 |
 | [`docs/14-playmcp-submission.md`](docs/14-playmcp-submission.md) | PlayMCP 제출 절차 + 준비 상태 점검(지연 측정 포함) |
+| [`docs/15-tool-structure-decision.md`](docs/15-tool-structure-decision.md) | ADR — 도구 구조 결정(3-tool 유지, 4-tool 분할 보류) |
 
 ## 작업 공간 (예정)
 
