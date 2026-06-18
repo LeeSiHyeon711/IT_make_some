@@ -20,7 +20,7 @@ import os
 
 from .schemas import Diagnosis, FirstExperiment, IntakeData, TimeBudget, ToolMeta
 
-DEFAULT_MODEL = "claude-3-5-haiku-latest"  # 가벼운 기본값 (MODEL_NAME 으로 override)
+DEFAULT_MODEL = "claude-haiku-4-5"  # 가벼운 기본값 (MODEL_NAME 으로 override). 구버전 3-5-haiku-latest는 EOL 404.
 DEFAULT_TIMEOUT_SECONDS = 2.5
 
 _VALID_BUDGETS = {"30_MIN", "TODAY", "TWO_DAYS", "ONE_WEEK", "TWO_WEEKS_PLUS", "UNKNOWN"}
@@ -89,19 +89,26 @@ def is_llm_enabled() -> bool:
     return _block_reason() is None
 
 
-def call_anthropic(prompt: str, *, max_tokens: int = 800) -> str:
-    """Anthropic 호출(지연 import). 오류는 LLMTimeout/LLMError로 정규화해 던진다."""
+def call_anthropic(prompt: str, *, max_tokens: int = 800, prefill: str | None = None) -> str:
+    """Anthropic 호출(지연 import). 오류는 LLMTimeout/LLMError로 정규화해 던진다.
+
+    prefill: assistant 응답을 이 문자열로 시작하도록 강제(예: '{' → JSON만 출력 보장).
+    """
     try:
         import anthropic  # 지연 import — 키/패키지 없어도 모듈 로드 안 깨지게
     except Exception as exc:  # noqa: BLE001
         raise LLMError(f"anthropic import 실패: {exc}") from exc
+
+    messages = [{"role": "user", "content": prompt}]
+    if prefill:
+        messages.append({"role": "assistant", "content": prefill})
 
     client = anthropic.Anthropic(timeout=_timeout_seconds())  # api_key는 env에서 자동
     try:
         msg = client.messages.create(
             model=_model_name(),
             max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}],
+            messages=messages,
         )
     except Exception as exc:  # noqa: BLE001
         name = type(exc).__name__.lower()
@@ -113,7 +120,7 @@ def call_anthropic(prompt: str, *, max_tokens: int = 800) -> str:
     text = "\n".join(p for p in parts if p).strip()
     if not text:
         raise LLMError("빈 응답")
-    return text
+    return (prefill + text) if prefill else text  # 프리필 사용 시 시작 토큰 복원
 
 
 def _parse_json(text: str) -> dict:
@@ -221,7 +228,7 @@ def prepare_intake_llm(idea_text: str, time_budget: str) -> IntakeData:
         f"검증 가능 시간 힌트: {time_budget}\n"
         f"서술: {idea_text}"
     )
-    data = _parse_json(call_anthropic(prompt, max_tokens=500))
+    data = _parse_json(call_anthropic(prompt, max_tokens=500, prefill="{"))
     return IntakeData(
         input_summary=str(data.get("idea_summary") or idea_text)[:200],
         service_type=_guess_service_type(idea_text),  # type: ignore[arg-type]
@@ -244,7 +251,7 @@ def diagnose_idea_llm(intake: IntakeData) -> Diagnosis:
         "비난 말고 '먼저 확인할 지점'으로. SELF면 문제 존재를 묻지 말 것.\n"
         f"접수: {intake.model_dump_json()}"
     )
-    data = _parse_json(call_anthropic(prompt, max_tokens=500))
+    data = _parse_json(call_anthropic(prompt, max_tokens=500, prefill="{"))
     return Diagnosis(
         problem_statement=intake.problem or "",
         target_user_assumption=f"'{intake.target_user or '미정'}'이(가) 이 도구를 실제로 쓸 것이다",
@@ -263,7 +270,7 @@ def design_first_experiment_llm(intake: IntakeData, diagnosis: Diagnosis) -> Fir
         "success_criteria(1~2 str배열), do_not_build_yet(최대3 str배열), next_step_if_passed(str).\n"
         f"시간예산: {intake.validation_time_budget} / 균열점: {diagnosis.crack_point}"
     )
-    data = _parse_json(call_anthropic(prompt, max_tokens=600))
+    data = _parse_json(call_anthropic(prompt, max_tokens=900, prefill="{"))  # 출력이 커 잘림 방지
     label = _BUDGET_LABEL.get(intake.validation_time_budget, "미정")
     return FirstExperiment(
         time_budget=label,
