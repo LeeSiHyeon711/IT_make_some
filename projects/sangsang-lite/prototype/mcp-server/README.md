@@ -30,32 +30,71 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 PYTHONPATH=src PORT=8000 python -m sangsang_lite_mcp.server
 # → Streamable HTTP endpoint: http://localhost:8000/mcp
+# 포트가 점유돼 있으면 PORT=8791 등으로 바꿔 실행 (server.py가 PORT/HOST env를 읽음)
 ```
 
-## Docker
+---
+
+## 검증 (Verification)
+
+> 순서대로 따라 하면 7개 목표(서버 실행 · /mcp · tools/list 3개 · annotations 5종 · tools/call · Docker build · Inspector)를 모두 확인할 수 있다.
+
+### 1) 로컬 서버 실행
 
 ```bash
-docker build -t sangsang-lite-mcp .
-docker run -p 8000:8000 sangsang-lite-mcp
-# → http://localhost:8000/mcp
+cd projects/sangsang-lite/prototype/mcp-server
+pip install -r requirements.txt
+PYTHONPATH=src PORT=8000 python -m sangsang_lite_mcp.server   # http://localhost:8000/mcp
 ```
 
-## MCP Inspector 점검
+### 2) 내부 verify 스크립트 (가장 빠른 전체 점검)
+
+서버가 떠 있는 상태에서 **다른 터미널**에서 실행한다. initialize → tools/list(3개) → annotations(5종) → tools/call 체이닝까지 한 번에 검증.
 
 ```bash
-# 1) tools/list — 3개 도구 + annotations 노출 확인
+# 같은 venv(mcp 설치됨)에서
+python scripts/verify_mcp.py                          # 기본 http://127.0.0.1:8000/mcp
+python scripts/verify_mcp.py http://127.0.0.1:8791/mcp   # 다른 포트
+MCP_URL=http://127.0.0.1:8000/mcp python scripts/verify_mcp.py
+# 종료코드 0=통과 / 1=실패
+```
+
+### 3) MCP Inspector — tools/list (공식 CLI)
+
+```bash
 npx @modelcontextprotocol/inspector --cli http://localhost:8000/mcp --transport http --method tools/list
+```
+- `--transport http` = Streamable HTTP(기본 SSE 아님). 도구 3개 + 각 annotations 노출 확인.
 
-# 2) tools/call — prepare_intake 스모크 테스트 (스칼라 인자라 CLI로 가장 쉬움)
+### 4) MCP Inspector — tools/call (공식 CLI)
+
+```bash
+# 스칼라 인자라 CLI로 가장 쉬운 스모크 테스트
 npx @modelcontextprotocol/inspector --cli http://localhost:8000/mcp --transport http \
   --method tools/call --tool-name prepare_intake \
   --tool-arg idea_text="배달 라이더용 식당 메모 앱" --tool-arg time_budget=TWO_DAYS
 
-# 3) UI 모드 (object 입력인 diagnose_idea/design_first_experiment 점검에 편함)
-npx @modelcontextprotocol/inspector   # http://localhost:6274 → transport=Streamable HTTP, URL=/mcp
+# object 입력(diagnose_idea/design_first_experiment)은 UI 모드가 편함
+npx @modelcontextprotocol/inspector   # http://localhost:6274 → transport=Streamable HTTP, URL=…/mcp
 ```
 
-> `--transport http` 가 Streamable HTTP를 의미(기본 SSE 아님).
+### 5) Docker build & run (linux/amd64 — 배포 타깃 기준)
+
+```bash
+cd projects/sangsang-lite/prototype/mcp-server
+
+# PlayMCP/배포 환경은 보통 linux/amd64. Apple Silicon 등에서도 동일 타깃으로 빌드.
+docker build --platform linux/amd64 -t sangsang-lite-mcp:latest .
+
+# 컨테이너 실행 (PORT 주입 가능, 컨테이너 내부 0.0.0.0 바인딩은 server.py가 처리)
+docker run --rm -p 8000:8000 -e PORT=8000 sangsang-lite-mcp:latest
+# → http://localhost:8000/mcp
+
+# 다른 터미널에서 동일하게 검증
+python scripts/verify_mcp.py http://127.0.0.1:8000/mcp
+```
+
+> 로컬에 Docker가 없으면 build/run은 **미검증 상태로 남긴다.** 위 명령은 linux/amd64 기준이며, 실행 CMD(`python -m sangsang_lite_mcp.server`)는 로컬에서 검증됨.
 
 ---
 
@@ -68,6 +107,8 @@ mcp-server/
 ├─ .env.example
 ├─ .dockerignore
 ├─ README.md
+├─ scripts/
+│  └─ verify_mcp.py        # 실행 중 서버 검증(tools/list+call 체이닝)
 └─ src/sangsang_lite_mcp/
    ├─ server.py            # FastMCP(stateless_http, json_response) + run(streamable-http)
    ├─ schemas.py           # IntakeData / Diagnosis / FirstExperiment (→ inputSchema 자동)
