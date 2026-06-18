@@ -1,5 +1,6 @@
-# 16 · Cloud Run 배포 설정
+# 16 · Cloud Run 배포 설정 (일반/적합성)
 
+> ▶ **실제 배포는 [`19`](19-cloud-run-deployment.md)(standalone repo `sangsang-lite-mcp` 기준) 참조.** 본 문서는 일반 설정·적합성 점검 기록.
 > 상상공방 Lite MCP 서버(3-tool)를 Google Cloud Run에 배포하기 위한 설정·절차.
 > 작성일: 2026-06-19 · 관련: [`14`](14-playmcp-submission.md), [`15`](15-tool-structure-decision.md), 서버: [`../prototype/mcp-server/`](../prototype/mcp-server/)
 >

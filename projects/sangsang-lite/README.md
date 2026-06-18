@@ -51,6 +51,7 @@ projects/sangsang-lite/
 | [`docs/15-tool-structure-decision.md`](docs/15-tool-structure-decision.md) | ADR — 도구 구조 결정(3-tool 유지, 4-tool 분할 보류) |
 | [`docs/16-cloud-run-deployment.md`](docs/16-cloud-run-deployment.md) | Cloud Run 배포 설정·절차 + 적합성 점검 + 등록 전 체크리스트 |
 | [`docs/17-standalone-repo-extraction.md`](docs/17-standalone-repo-extraction.md) | 제출용 전용 repo 분리 절차(준비 — KC 컨텍스트 미지원 대비) |
+| [`docs/19-cloud-run-deployment.md`](docs/19-cloud-run-deployment.md) | Cloud Run 직접 배포(standalone repo 기준) — KC env 한계 전환 |
 
 ## 작업 공간 (예정)
 
