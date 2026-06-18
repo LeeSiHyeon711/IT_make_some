@@ -50,6 +50,7 @@ projects/sangsang-lite/
 | [`docs/14-playmcp-submission.md`](docs/14-playmcp-submission.md) | PlayMCP 제출 절차 + 준비 상태 점검(지연 측정 포함) |
 | [`docs/15-tool-structure-decision.md`](docs/15-tool-structure-decision.md) | ADR — 도구 구조 결정(3-tool 유지, 4-tool 분할 보류) |
 | [`docs/16-cloud-run-deployment.md`](docs/16-cloud-run-deployment.md) | Cloud Run 배포 설정·절차 + 적합성 점검 + 등록 전 체크리스트 |
+| [`docs/17-standalone-repo-extraction.md`](docs/17-standalone-repo-extraction.md) | 제출용 전용 repo 분리 절차(준비 — KC 컨텍스트 미지원 대비) |
 
 ## 작업 공간 (예정)
 
