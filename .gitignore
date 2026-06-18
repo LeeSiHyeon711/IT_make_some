@@ -17,6 +17,15 @@ captures/
 .DS_Store
 Thumbs.db
 
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
 # --- Node (웹 프로젝트용) ---
 node_modules/
 dist/
