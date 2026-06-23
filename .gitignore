@@ -39,3 +39,6 @@ dist/
 # --- 고객별 개발 코드 (자체 repo로 분리 — 공방 repo는 공정 산출물만 추적) ---
 # PickUpMemo_v2 개발 코드는 github.com/LeeSiHyeon711/PickUpMemo_v2 에 별도 보관
 projects/PickUpMemo_v2/05-개발/PickUpMemo_v2/
+# AI-Morning-Brief / PawprintDiary 개발 코드는 각각 자체 git repo(중첩 .git, .env 포함)로 분리 보관
+projects/AI-Morning-Brief/05-개발/
+projects/PawprintDiary/05-개발/
