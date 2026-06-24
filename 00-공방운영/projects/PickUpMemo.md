@@ -58,13 +58,12 @@
 - **신규 구현(v3)**: AddressExtractor(픽업/전달 주소 2소스 fallback), RouteService(캐싱 + 전체 5초 `withTimeoutOrNull` + 전달지 **4단계 geocode fallback** + 실패 원인 분류), KakaoRouteProvider(픽업=키워드/전달=주소검색), MemoPopupController 경로 영역 + `AtomicLong` 토큰 세대 경합 방지, 키 부재 시 무크래시("거리 정보 확인 불가"), debug/release 표시 분기. **v3.1 오르막 주의 = 골격만(동작 없음)**.
 - **빌드/테스트**: **Debug + Release 모두 성공(JBR 21)**, APK 2종. *머신 기본 JDK가 Java 25면 Kotlin 플러그인 비호환 → JBR 21 지정 필수.* **실기기 테스트 완료.**
 - **개발 분담**: Claude Code = 상담·기획·설계·FEAT-14·15 + 전 공정 오케스트레이션/검수. Cursor = FEAT-16~23 구현 + 실기기.
-- **상태**: ✅ 코드·이슈 = PickUpMemo_v2 repo 반영 완료(이슈 #15~#24 closed, working tree clean). ⚠ **공방 repo(IT_make_some)에는 v3 공정 산출물(`_v3` 문서·FEAT-14~23)이 아직 untracked(미반영).**
+- **상태**: ✅ 코드·이슈 = PickUpMemo_v2 repo 반영 완료(이슈 #15~#24 closed, working tree clean). ✅ **공방 repo(IT_make_some)에도 v3 공정 산출물 반영 완료**(2026-06-24, commit `7ace2a6` — `_v3` 문서·FEAT-14~23·인수인계).
 
 ---
 
 ## 현재 상태 / 다음
-- v3 기능 개발·빌드·실기기까지 **완료**.
-- **대기/미결**: 공방 repo의 v3 공정 산출물 커밋·푸시(원하면 비밀정보 점검 후 진행).
+- v3 기능 개발·빌드·실기기까지 **완료**. 공정 산출물도 공방 repo 반영 완료.
 - v3.1(오르막 주의 실구현)은 **보류**(다음 버전 후보).
 
 ## 비고 / 주의
