@@ -8,7 +8,7 @@
 ---
 
 ## 현재 상태 (한 줄)
-✅ 개발(5단계) 완료 — 전 이슈 #1~#9 **closed/push**. ⚠ **QA 진입 승인 대기(`/승인 PawprintDiary`)**.
+✅ **7단계 납품 완료** (2026-06-24) — 개발(전 이슈 #1~#9 closed/push) → 자동 QA(AC-01~16 전통과) → 수동 테스트 통과 → 납품 산출물 작성·반영 완료.
 
 ## 기술 스택
 Next.js(App Router) + React + TypeScript + Tailwind, 로컬 저장 **IndexedDB(`idb`)**, AI **`@anthropic-ai/sdk`(서버 전용)**, `date-fns`.
@@ -21,8 +21,9 @@ Next.js(App Router) + React + TypeScript + Tailwind, 로컬 저장 **IndexedDB(`
 - 3 설계(architect): 설계서 + **FEAT-01~09**.
 - 4 GitHub(2026-06-22): repo `pawprint-diary` 생성, 이슈 **#1~#9 등록(FEAT 1:1, 번호 일치)**, `05-개발/` git init + remote 연결.
 - 5 개발(builder): 이슈 **#1~#9 전부 구현·closed·push**(예: #1 commit `9245d7c`). *builder·repo-manager Bash 차단 → 공방장이 `npm run build`·git/gh 대행, 매 FEAT 빌드 통과 확인, FEAT-05 Mock 가드레일 curl 실측 검증.*
-- 6 검수: **대기**(QA 진입 승인 `/승인` 전).
-- 7 납품: 미진행.
+- 6 검수(reviewer): ✅ 완료 — **AC-01~16 전통과, 결함 0**. Playwright MCP로 `localhost:3000` 실제 브라우저 검증, **실제 Anthropic 키로 AI 응답 검증**. 스크린샷 16종(`06-검수/screenshots/`). 가드레일 확인(AC-07 단정 표현 미포함, AI 답변이 단정 진단 회피 + 증상 지속 시 수의사 상담 권장).
+- 수동 테스트(사람): ✅ 통과.
+- 7 납품(delivery): ✅ 완료 — `실행안내.md` + `고객전달문.md` + `증거자료체크리스트.md`.
 
 ## 구현된 기능 (요지)
 - 반려동물 프로필 등록/수정(`Pet`: 종·품종·나이·성별·성격·건강메모·사진 Blob)
@@ -37,8 +38,9 @@ Next.js(App Router) + React + TypeScript + Tailwind, 로컬 저장 **IndexedDB(`
 ---
 
 ## 현재 상태 / 다음
-- **대기**: `/승인 PawprintDiary` → 6단계 자동 QA(reviewer) 진입 → 수동 테스트 → 7 납품.
+- ✅ 상담~납품 **풀사이클 완주**(7단계 납품 완료). 공방 repo에 검수리포트·스크린샷·납품 산출물 반영(commit `28ebe44`).
 - README는 구현 기준으로 작성 완료(자체 repo).
+- 다음(선택): 사용자 피드백 기반 v2 버전업 또는 배포(호스팅) 검토.
 
 ## 비고 / 주의
 - 사용자 데이터는 **기기 로컬에만** 저장(클라우드 동기화·계정 없음). 서버 라우트는 AI 프록시 용도.

@@ -13,7 +13,7 @@
 | **PickUpMemo** | Android 앱(Kotlin) | **v3** | v3 빌드·실기기 테스트 완료 / 공정 산출물 공방 repo 반영 완료 | `LeeSiHyeon711/PickUpMemo`(v1), `LeeSiHyeon711/PickUpMemo_v2`(v2·v3) | [PickUpMemo.md](PickUpMemo.md) |
 | **AI-Morning-Brief** | Python CLI 자동화 | **V0.1.1** | 개발 완료·푸시 / ✅ **정기 04:30 실전 검증 성공**(자동 발송 중) / 월간리포트=V0.2 후보 | `LeeSiHyeon711/AI-Morning-Brief` | [AI-Morning-Brief.md](AI-Morning-Brief.md) |
 | **아이디어 건강검진**(sangsang-lite) | MCP 서버(Python) | 반복 이터레이션 | 코드 완성·푸시 / **Cloud Run 재배포 + PlayMCP 등록 대기(사용자 액션)** | `LeeSiHyeon711/sangsang-lite-mcp` | [아이디어-건강검진.md](아이디어-건강검진.md) |
-| **PawprintDiary** | 웹(Next.js) | MVP | 개발 완료·전 이슈 closed/push / **QA 진입 승인 대기(`/승인`)** | `LeeSiHyeon711/pawprint-diary` | [PawprintDiary.md](PawprintDiary.md) |
+| **PawprintDiary** | 웹(Next.js) | MVP | ✅ **납품 완료**(상담~납품 풀사이클, AC-01~16 전통과) | `LeeSiHyeon711/pawprint-diary` | [PawprintDiary.md](PawprintDiary.md) |
 | **D-Day 카운터** | 정적 웹(HTML) | v1 | 풀사이클 완주(공방 라인 첫 검증 사례) | `LeeSiHyeon711/dday-test` | [D-Day카운터.md](D-Day카운터.md) |
 
 > 개발 코드는 **프로젝트별 자체 git repo로 분리** 보관한다(공방 repo `IT_make_some`는 공정 산출물 문서만 추적). 각 자체 repo에는 `.env`/`local.properties` 등 비밀값이 있으므로 **절대 공방 repo로 끌어오지 않는다.**
