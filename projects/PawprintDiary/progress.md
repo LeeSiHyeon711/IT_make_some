@@ -6,8 +6,10 @@
 
 # progress.md — PawprintDiary (발자국일기)
 
-- 최종 갱신: 2026-06-22
-- 현재 단계: **5단계(개발) 완료 — 전 이슈 #1~#9 closed/push. QA 진입 승인 대기(`/승인 PawprintDiary`)**
+- 최종 갱신: 2026-06-24
+- 현재 단계: **7단계 납품 완료** — 6단계 자동 QA(AC-01~16 전통과, 결함 0, Playwright 실브라우저) + 사람 수동 테스트 통과 → 납품 산출물(실행안내·고객전달문·증거자료체크리스트) 작성 완료
+- QA 비고: dev 서버 http://localhost:3000 기동 중(Next 16, .env 실제 키). 비블로킹 관찰 2건: today 재진입 빈 폼 / favicon 미배치
+- Next 16 working tree(계정 이전 흔적) 기준으로 빌드·QA 통과. .env는 .gitignore 보호 추가됨
 - 비고: builder·repo-manager의 Bash 차단 → 공방장이 npm build·git/gh 대행. 매 FEAT `npm run build` 통과 확인, FEAT-05 Mock 가드레일 curl 실측 검증.
 
 ---
