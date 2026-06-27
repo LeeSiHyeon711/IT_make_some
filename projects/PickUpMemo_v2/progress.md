@@ -28,4 +28,6 @@
 | #15 | FEAT-14 인프라: INTERNET 권한 + OkHttp + API 키 BuildConfig 주입 | 구현완료(commit 대기) | 2026-06-24 |
 
 ## 재개 지점
-이슈 #15 (FEAT-14) 구현 완료. 공방장이 commit/push + 이슈 close 후 남은 이슈 확인 필요.
+v3 전 이슈(#15~#24) + v3.1 안정화 hotfix(#25) close 완료. open 이슈 0.
+- 2026-06-27: 이슈 #25(v3.1 안정화 Fix A~D) 커밋 9062783 push·close. release app-release.apk(R8, 2.2M) 설치 테스트 대기.
+- 다음: 사람이 release APK 설치 → 접근성 ON → 배터리/멈춤 실기기 검증. 결과 따라 Fix E(로그/DB batch flush) 별도 이슈 분리.
