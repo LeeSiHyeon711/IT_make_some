@@ -64,4 +64,4 @@ IT_make_some/
 5. [상상공방_모델운영전략](상상공방_모델운영전략.md) — 역할별 모델 선택 가이드
 6. (시간 없으면) [상상공방_새 세션용 요약](상상공방_새세션용_요약.md) — 붙여넣기용 1~2p 압축본
 
-> 더 깊은 규칙이 필요하면: 루트 `CLAUDE.md`(헌법), `docs/pipeline.md`(라인 상세), `docs/architecture.md`(아키텍처), `docs/OPS-01-git-flow-design.md`(Git 권한 설계).
+> 더 깊은 규칙이 필요하면: 루트 `CLAUDE.md`(헌법), `docs/architecture/pipeline.md`(라인 상세), `docs/architecture/architecture.md`(아키텍처), `docs/operations/OPS-01-git-flow-design.md`(Git 권한 설계).

@@ -79,7 +79,7 @@ IT상상공방은 **고객의 요구사항을 빠르게 확인 가능한 MVP 형
 > repo 이름은 프로젝트명을 따르며, 4단계 첫 실행 시 없으면 생성한다. repo URL은 `이슈등록내역.md`에 기록한다.
 
 전체 라인의 진행과 단계 간 인계는 **오케스트레이터(공방장)** 가 관장한다.
-상세 명세는 `docs/pipeline.md`, 흐름도는 `docs/architecture.md` 참조.
+상세 명세는 `docs/architecture/pipeline.md`, 흐름도는 `docs/architecture/architecture.md` 참조.
 
 ---
 
@@ -128,9 +128,11 @@ IT_make_some/
 │   ├── commands/              # 오케스트레이터 커맨드 (예: /신규프로젝트, /다음단계)
 │   ├── skills/                # 재사용 스킬 (예: 산출물 템플릿 생성)
 │   └── rules/                 # 단계별 작업 규칙 (paths 스코프로 lazy-load)
-├── docs/
-│   ├── architecture.md        # 설계도 — 오케스트레이션 흐름도, 에이전트 명세
-│   └── pipeline.md            # 7단계 생산 라인 상세 (각 단계 입출력·도구범위)
+├── docs/                      # 공방 OS 문서 (목적별 4분류) — 인덱스: docs/README.md
+│   ├── architecture/          # 시스템 구조 청사진 (architecture·pipeline)
+│   ├── operations/            # 운영·개선·거버넌스 (운영개선-issues·OPS-01·공정개선-v2)
+│   ├── research/              # 측정·근거 (생산성 비교 실측)
+│   └── validation/            # 라인 검증 절차 (검증가이드)
 ├── templates/                 # 산출물 템플릿 (요구사항정의서, PRD, 설계서 등)
 └── projects/
     ├── _template/             # 신규 프로젝트 생성 시 복제되는 빈 골격 (7개 단계 폴더)

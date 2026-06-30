@@ -37,7 +37,7 @@
   - 수동 테스트(사람): **실기기 게이트 통과**.
   - 7 납품(delivery·Sonnet): 실행안내 + 고객전달문 + 증거자료체크리스트.
 - **구현 기능**: 메모 CRUD(Room `memos`), 접근성 서비스(배민커넥트 `com.woowahan.bros` 단독), StoreExtractor(픽업지~전달지 상호 추출), MemoMatcher(상호+지점 동시 포함), DedupGuard(30초 중복억제), 오버레이 팝업, 배민 로그 보관함(`baemin_logs` 1000건 링버퍼)+내보내기(FileProvider), 권한 안내 허브, 테스트 화면.
-- **생산성 메모**: v1→v2에서 builder Opus→**Sonnet** + FEAT 1:1 + 최소 문서로 **Builder 호출당 토큰 보수적 −27%**(근거 `docs/PickUpMemo_v1_v2_생산성비교.md`). 무거운 판단은 설계(architect)로 이동.
+- **생산성 메모**: v1→v2에서 builder Opus→**Sonnet** + FEAT 1:1 + 최소 문서로 **Builder 호출당 토큰 보수적 −27%**(근거 `docs/research/PickUpMemo_v1_v2_생산성비교.md`). 무거운 판단은 설계(architect)로 이동.
 - **상태**: ✅ 개발·빌드·실기기·납품 완료, repo 반영.
 
 ---

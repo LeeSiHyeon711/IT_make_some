@@ -1,7 +1,7 @@
 # IT상상공방 생산 라인 상세 (Pipeline)
 
 7단계 각각의 **입력·처리·출력·완료조건**을 정의한다. 에이전트와 규칙 파일은 이 문서를 기준으로 구현한다.
-용어는 루트 `CLAUDE.md`, 구조는 `docs/architecture.md` 참조.
+용어는 루트 `CLAUDE.md`, 구조는 `docs/architecture/architecture.md` 참조.
 
 ---
 
