@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .card {
+            width: 300px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,.1);
+            background-color: white;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 34px);
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .list-group {
+            list-style-type: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+        .todo-item.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        button.filter-btn, button.del-btn {
+            background-color: transparent;
+            color: #6c757d;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .filter-btn.selected {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="input-group">
+        <input type="text" id="new-task-input" placeholder="Add a new task...">
+        <button id="add-task-btn">추가</button>
+    </div>
+
+    <ul id="task-list"></ul>
+
+    <div class="filters">
+        <button data-filter="all" class="filter-btn selected">전체</button>
+        <button data-filter="active" class="filter-btn">진행중</button>
+        <button data-filter="completed" class="filter-btn">완료</button>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const taskList = document.getElementById('task-list');
+    const newTaskInput = document.getElementById('new-task-input');
+
+    if (window.crypto && window.crypto.randomUUID) {
+        generateID = () => crypto.randomUUID();
+    } else {
+        generateID = () => Date.now().toString(36) + Math.random().toString(36).substring(2);
+    }
+
+    loadTasks();
+
+    document.getElementById('add-task-btn').addEventListener('click', addTask);
+    newTaskInput.addEventListener('keydown', handleKeyDown);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            if (filter === 'all') showAllTasks();
+            else if (filter === 'active') showActiveTasks();
+            else if (filter === 'completed') showCompletedTasks();
+        });
+    });
+
+    function handleKeyDown(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addTask();
+        }
+    }
+
+    function addTask() {
+        const taskText = newTaskInput.value.trim();
+        if (taskText === '') return;
+
+        const id = generateID();
+        const createdAt = Date.now();
+        const taskItem = {id, text: taskText, completed: false, createdAt};
+        tasks.push(taskItem);
+
+        renderTasks(tasks);
+        saveTasks();
+
+        newTaskInput.value = '';
+    }
+
+    function deleteTask(id) {
+        tasks = tasks.filter(task => task.id !== id);
+        renderTasks(tasks);
+        saveTasks();
+    }
+
+    function toggleCompleted(id) {
+        const taskIndex = tasks.findIndex(task => task.id === id);
+        if (taskIndex > -1) {
+            tasks[taskIndex].completed = !tasks[taskIndex].completed;
+            renderTasks(tasks);
+            saveTasks();
+        }
+    }
+
+    function showAllTasks() {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('selected'));
+        document.querySelector(`.filter-btn[data-filter="all"]`).classList.add('selected');
+        renderTasks(tasks);
+    }
+
+    function showActiveTasks() {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('selected'));
+        document.querySelector(`.filter-btn[data-filter="active"]`).classList.add('selected');
+        renderTasks(tasks.filter(task => !task.completed));
+    }
+
+    function showCompletedTasks() {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('selected'));
+        document.querySelector(`.filter-btn[data-filter="completed"]`).classList.add('selected');
+        renderTasks(tasks.filter(task => task.completed));
+    }
+
+    function saveTasks() {
+        localStorage.setItem('todo-developer:items', JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+        const savedTasks = JSON.parse(localStorage.getItem('todo-developer:items')) || [];
+        tasks = savedTasks;
+        renderTasks(savedTasks);
+    }
+
+    function renderTasks(items) {
+        taskList.innerHTML = '';
+        if (!items.length) return;
+
+        items.forEach(task => {
+            const li = document.createElement('li');
+            li.classList.add('todo-item');
+            if (task.completed) li.classList.add('completed');
+            li.setAttribute('data-id', task.id);
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = task.completed;
+            checkbox.addEventListener('change', () => toggleCompleted(task.id));
+
+            const label = document.createElement('label');
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(task.text));
+
+            const delBtn = document.createElement('button');
+            delBtn.classList.add('del-btn');
+            delBtn.innerText = '삭제';
+            delBtn.onclick = (e) => {
+                e.stopPropagation();
+                deleteTask(task.id);
+            }
+
+            li.appendChild(label);
+            li.appendChild(delBtn);
+
+            taskList.append(li);
+        });
+    }
+});
+</script>
+</body>
+</html>
